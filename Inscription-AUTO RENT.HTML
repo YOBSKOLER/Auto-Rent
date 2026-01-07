@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Inscription-Auto Rent</title>
+    <link rel="stylesheet" href="Inscription-AUTO RENT.css" />
+  </head>
+  <body>
+    <div class="form-container">
+      <h2>Creer un compte</h2>
+      <form action="traitement_inscription.php" method="POST">
+        <input type="text" name="nom" placeholder="NOM" required />
+        <input type="text" name="prenom" placeholder="PRENOM" required />
+        <input type="email" name="email" placeholder="ADRESSE EMAIL" required />
+        <input type="tel" name="telephone" placeholder="TELEPHONE" required />
+        <input
+          type="password"
+          name="password"
+          placeholder="Mot de passe"
+          required
+        />
+        <input
+          type="password"
+          name="password"
+          placeholder="Confirmer votre mot de passe"
+          required
+        />
+        <input type="submit" value="S'inscrire" />
+      </form>
+      <div class="link">
+        <p>Deja un compte ?</p>
+        <a href="Accueil.html">Se connecter</a>
+      </div>
+    </div>
+    <script>
+      document.querySelector("form").addEventListener("submit", function (e) {
+        const nom = document.querySelector('input[name="nom"]').value.trim();
+        const prenom = document
+          .querySelector('input[name="prenom"]')
+          .value.trim();
+        const email = document
+          .querySelector('input[name="email"]')
+          .value.trim();
+        const telephone = document
+          .querySelector('input[name="telephone"]')
+          .value.trim();
+        if (!nom || !prenom || !email || !telephone) {
+          e.preventDefault();
+          alert("Veuillez remplir tous les champs.");
+        }
+      });
+    </script>
+  </body>
+</html>

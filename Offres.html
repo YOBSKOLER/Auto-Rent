@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AUTO RENT - Offres</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        background-color: #f4f5f5;
+        color: #212529;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      header {
+        background: #0b0c4a;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        position: none;
+        top: 0;
+        z-index: 1030;
+        padding: 1rem 0;
+      }
+
+      /* Style filtre - conteneur */
+      #filters {
+        background: white;
+        border-radius: 8px;
+        padding: 1rem 1.5rem;
+        box-shadow: 0 4px 6px rgb(0 0 0 / 0.1);
+        margin-bottom: 2rem;
+      }
+
+      /* Filtres en ligne */
+      #filters .form-select,
+      #filters .form-control {
+        min-width: 150px;
+        max-width: 220px;
+        margin-right: 1rem;
+        margin-bottom: 0.75rem;
+        border-radius: 5px;
+        border: 1.8px solid #111112;
+        transition: border-color 0.3s ease;
+      }
+
+      #filters .form-select:focus,
+      #filters .form-control:focus {
+        border-color: #0a58ca;
+        box-shadow: 0 0 5px rgba(13, 110, 253, 0.5);
+        outline: none;
+      }
+
+      /* Bouton Rechercher */
+      #btnSearch {
+        background-color: hwb(17 10% 16%);
+        border: none;
+        color: white;
+        font-weight: 600;
+        padding: 0.45rem 1.3rem;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+      }
+
+      #btnSearch:hover {
+        background-color: #f9a755;
+      }
+
+      /* Carte véhicule */
+      .vehicle-card {
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 3px 10px rgb(0 0 0 / 0.1);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+      }
+
+      .vehicle-card:hover {
+        box-shadow: 0 8px 20px rgb(0 0 0 / 0.2);
+        transform: translateY(-5px);
+      }
+
+      .vehicle-img {
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        height: 180px;
+        object-fit: cover;
+        width: 100%;
+      }
+
+      .vehicle-info {
+        padding: 1rem;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .vehicle-info h3 {
+        margin-bottom: 0.25rem;
+        font-weight: 700;
+        color: #04080f;
+      }
+
+      .vehicle-info {
+        margin-bottom: 0.25rem;
+        color: #0d0d0d;
+        font-size: 0.9rem;
+      }
+
+      .price {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: hsl(211, 94%, 58%);
+        margin-top: 0.75rem;
+      }
+
+      .btn-reserve {
+        margin-top: 1rem;
+        background-color: hwb(17 10% 16%);
+        border: none;
+        color: white;
+        font-weight: 600;
+        padding: 0.5rem;
+        border-radius: 6px;
+        transition: background-color 0.3s ease;
+      }
+
+      .btn-reserve:hover {
+        background-color: #f9a755;
+      }
+
+      /* Responsive spacing filtres */
+      @media (max-width: 768px) {
+        #filters {
+          padding: 1rem 1rem;
+        }
+        #filters .form-select,
+        #filters .form-control {
+          min-width: 100%;
+          margin-right: 0;
+        }
+        #btnSearch {
+          width: 100%;
+          margin-top: 0.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="container d-flex justify-content-between align-items-center">
+      <img src="logo.png" alt="Logo AUTO-RENT" style="height: 90px" />
+      <div class="d-flex align-items-center gap-2">
+        <input
+          type="text"
+          id="searchinput"
+          placeholder="Rechercher un véhicule..."
+          class="form-control"
+          style="width: 250px"
+        />
+        <button id="btnSearch">Rechercher</button>
+      </div>
+    </header>
+
+    <main class="container my-5">
+      <h2 class="mb-4 text-center">Nos offres disponibles</h2>
+
+      <section id="filters" class="d-flex flex-wrap justify-content-center">
+        <select class="form-select" id="sort-select" title="Trier par">
+          <option value="">Trier par</option>
+          <option value="prix">Prix</option>
+          <option value="pop">Popularité</option>
+        </select>
+
+        <select class="form-select" id="filter-type" title="Type de véhicule">
+          <option value="">Type de véhicule</option>
+          <option value="suv">SUV</option>
+          <option value="berline">Berline</option>
+          <option value="citadine">Citadine</option>
+        </select>
+
+        <select class="form-select" id="filter-gear" title="Boîte de vitesses">
+          <option value="">Boîte de vitesses</option>
+          <option value="auto">Automatique</option>
+          <option value="manuelle">Manuelle</option>
+        </select>
+
+        <select
+          class="form-select"
+          id="filter-seats"
+          title="Nombre de sièges min"
+        >
+          <option value="">Min. sièges</option>
+          <option value="2">2</option>
+          <option value="4">4</option>
+          <option value="5">5+</option>
+        </select>
+
+        <select
+          class="form-select"
+          id="filter-age"
+          title="Âge minimum conducteur"
+        >
+          <option value="">Âge min. conducteur</option>
+          <option value="18">18</option>
+          <option value="21">21</option>
+          <option value="25">25</option>
+        </select>
+      </section>
+
+      <section id="carContainer" class="row g-4">
+        <!-- Véhicules -->
+
+        <article
+          class="vehicle-card col-12 col-md-6 col-lg-4"
+          data-type="citadine"
+          data-gear="auto"
+          data-seats="5"
+          data-age="18"
+          data-price="25"
+          data-popularity="50"
+        >
+          <img src="peugeot-208-2.jpg" alt="Peugeot 208" class="vehicle-img" />
+          <div class="vehicle-info">
+            <h3>Peugeot 208</h3>
+            <p>
+              Automatique •<i class="fas fa-car-side"></i>
+              <i class="fas fa-door-closed"></i> 5 portes • Essence
+            </p>
+            <p class="price">25€/jour</p>
+            <button
+              class="btn-reserve"
+              onclick="ReserveCar('Peugeot 208')"
+              type="button"
+            >
+              Réserver
+            </button>
+          </div>
+        </article>
+
+        <article
+          class="vehicle-card col-12 col-md-6 col-lg-4"
+          data-type="citadine"
+          data-gear="manuelle"
+          data-seats="5"
+          data-age="18"
+          data-price="30"
+          data-popularity="80"
+        >
+          <img src="Renault clio.jpg" alt="Renault Clio" class="vehicle-img" />
+          <div class="vehicle-info">
+            <h3>Renault Clio</h3>
+            <p>Manuelle • 5 portes • Diesel</p>
+            <p class="price">30€/jour</p>
+            <button
+              class="btn-reserve"
+              onclick="ReserveCar('Renault Clio')"
+              type="button"
+            >
+              Réserver
+            </button>
+          </div>
+        </article>
+
+        <article
+          class="vehicle-card col-12 col-md-6 col-lg-4"
+          data-type="suv"
+          data-gear="auto"
+          data-seats="5"
+          data-age="21"
+          data-price="1000"
+          data-popularity="90"
+        >
+          <img src="RANGE ROVER.jpg" alt="Range Rover" class="vehicle-img" />
+          <div class="vehicle-info">
+            <h3>Range Rover</h3>
+            <p>Automatique • SUV Luxe • Essence</p>
+            <p class="price">1000€/jour</p>
+            <button
+              class="btn-reserve"
+              onclick="ReserveCar('Range Rover')"
+              type="button"
+            >
+              Réserver
+            </button>
+          </div>
+        </article>
+        <article
+          class="vehicle-card col-12 col-md-6 col-lg-4"
+          data-type="citadine"
+          data-gear="auto"
+          data-seats="5"
+          data-age="18"
+          data-price="25"
+          data-popularity="50"
+        >
+          <img src="peugeot-208-2.jpg" alt="Peugeot 208" class="vehicle-img" />
+          <div class="vehicle-info">
+            <h3>Peugeot 208</h3>
+            <p>
+              Automatique •<i class="fas fa-car-side"></i>
+              <i class="fas fa-door-closed"></i> 5 portes • Essence
+            </p>
+            <p class="price">25€/jour</p>
+            <button
+              class="btn-reserve"
+              onclick="ReserveCar('Peugeot 208')"
+              type="button"
+            >
+              Réserver
+            </button>
+          </div>
+        </article>
+        <article
+          class="vehicle-card col-12 col-md-6 col-lg-4"
+          data-type="citadine"
+          data-gear="auto"
+          data-seats="5"
+          data-age="18"
+          data-price="25"
+          data-popularity="50"
+        >
+          <img src="peugeot-208-2.jpg" alt="Peugeot 208" class="vehicle-img" />
+          <div class="vehicle-info">
+            <h3>Peugeot 208</h3>
+            <p>
+              Automatique •<i class="fas fa-car-side"></i>
+              <i class="fas fa-door-closed"></i> 5 portes • Essence
+            </p>
+            <p class="price">25€/jour</p>
+            <button
+              class="btn-reserve"
+              onclick="ReserveCar('Peugeot 208')"
+              type="button"
+            >
+              Réserver
+            </button>
+          </div>
+        </article>
+        <article
+          class="vehicle-card col-12 col-md-6 col-lg-4"
+          data-type="citadine"
+          data-gear="auto"
+          data-seats="5"
+          data-age="18"
+          data-price="25"
+          data-popularity="50"
+        >
+          <img src="peugeot-208-2.jpg" alt="Peugeot 208" class="vehicle-img" />
+          <div class="vehicle-info">
+            <h3>Peugeot 208</h3>
+            <p>
+              Automatique •<i class="fas fa-car-side"></i>
+              <i class="fas fa-door-closed"></i> 5 portes • Essence
+            </p>
+            <p class="price">25€/jour</p>
+            <button
+              class="btn-reserve"
+              onclick="ReserveCar('Peugeot 208')"
+              type="button"
+            >
+              Réserver
+            </button>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <footer class="text-center py-4 text-muted border-top">
+      &copy; 2025 AUTO RENT - Tous droits réservés.
+    </footer>
+
+    <script>
+      const filters = {
+        type: "",
+        gear: "",
+        seats: "",
+        age: "",
+      };
+
+      const carContainer = document.getElementById("carContainer");
+      const carItems = Array.from(document.querySelectorAll(".vehicle-card"));
+
+      function applyAllFilters() {
+        const searchText = document
+          .getElementById("searchinput")
+          .value.toLowerCase()
+          .trim();
+
+        filters.type = document.getElementById("filter-type").value;
+        filters.gear = document.getElementById("filter-gear").value;
+        filters.seats = document.getElementById("filter-seats").value;
+        filters.age = document.getElementById("filter-age").value;
+        const sortBy = document.getElementById("sort-select").value;
+
+        let filtered = carItems.filter((car) => {
+          const matchesType =
+            !filters.type || car.dataset.type === filters.type;
+          const matchesGear =
+            !filters.gear || car.dataset.gear === filters.gear;
+          const matchesSeats =
+            !filters.seats ||
+            parseInt(car.dataset.seats) >= parseInt(filters.seats);
+          const matchesAge =
+            !filters.age || parseInt(car.dataset.age) <= parseInt(filters.age);
+          const matchesSearch =
+            !searchText ||
+            car
+              .querySelector("h3")
+              .textContent.toLowerCase()
+              .includes(searchText);
+
+          return (
+            matchesType &&
+            matchesGear &&
+            matchesSeats &&
+            matchesAge &&
+            matchesSearch
+          );
+        });
+
+        // Tri
+        if (sortBy === "prix") {
+          filtered.sort(
+            (a, b) => parseFloat(a.dataset.price) - parseFloat(b.dataset.price)
+          );
+        } else if (sortBy === "pop") {
+          filtered.sort(
+            (a, b) =>
+              parseFloat(b.dataset.popularity) -
+              parseFloat(a.dataset.popularity)
+          );
+        }
+
+        // Vider le container
+        carContainer.innerHTML = "";
+
+        // Afficher les éléments filtrés
+        filtered.forEach((car) => carContainer.appendChild(car));
+      }
+
+      // Événements
+      document
+        .getElementById("filter-type")
+        .addEventListener("change", applyAllFilters);
+      document
+        .getElementById("filter-gear")
+        .addEventListener("change", applyAllFilters);
+      document
+        .getElementById("filter-seats")
+        .addEventListener("change", applyAllFilters);
+      document
+        .getElementById("filter-age")
+        .addEventListener("change", applyAllFilters);
+      document
+        .getElementById("sort-select")
+        .addEventListener("change", applyAllFilters);
+      document
+        .getElementById("btnSearch")
+        .addEventListener("click", applyAllFilters);
+      document
+        .getElementById("searchinput")
+        .addEventListener("keyup", applyAllFilters);
+
+      // Réservation demo
+      function ReserveCar(carName) {
+        alert("Réservation pour : " + carName);
+      }
+
+      // Chargement initial
+      window.addEventListener("DOMContentLoaded", applyAllFilters);
+    </script>
+  </body>
+</html>

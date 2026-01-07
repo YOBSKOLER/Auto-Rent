@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>À propos || AUTO-RENT</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Bootstrap Icons -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f8f9fa;
+        color: #212529;
+      }
+
+      .hero {
+        background: linear-gradient(to right, #0a58ca, #161c25);
+        color: white;
+        padding: 80px 0;
+        text-align: center;
+      }
+
+      .hero h1 {
+        font-weight: 700;
+        font-size: 2.8rem;
+      }
+
+      .hero p {
+        font-size: 1.2rem;
+        margin-top: 1rem;
+      }
+
+      .content-section {
+        padding: 4rem 0;
+      }
+
+      .section-title {
+        font-weight: 700;
+        color: #0b0c0e;
+        margin-bottom: 1.5rem;
+      }
+
+      .mission-box {
+        background: white;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      }
+
+      .values-list li {
+        margin-bottom: 0.5rem;
+      }
+
+      footer {
+        background-color: #fff;
+        border-top: 1px solid #dee2e6;
+        text-align: center;
+        padding: 1.5rem 0;
+        color: #6c757d;
+      }
+
+      .navbar-brand img {
+        height: 60px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Barre de navigation avec Offcanvas -->
+    <nav class="navbar navbar-dark bg-dark fixed-top">
+      <div class="container-fluid">
+        <button
+          class="btn btn-outline-light me-2"
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasMenu"
+        >
+          <i class="bi bi-list"></i>
+        </button>
+        <a class="navbar-brand" href="#">
+          <img src="logo.png" alt="Logo AUTO-RENT" />
+        </a>
+        <div>
+          <button class="btn btn-outline-light me-2" onclick="openPopup()">
+            <i class="bi bi-box-arrow-in-right"></i> Connexion/inscription
+          </button>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Menu Offcanvas -->
+    <div
+      class="offcanvas offcanvas-start bg-dark text-white"
+      tabindex="-1"
+      id="offcanvasMenu"
+    >
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title">Menu</h5>
+        <button
+          type="button"
+          class="btn-close btn-close-white"
+          data-bs-dismiss="offcanvas"
+        ></button>
+      </div>
+      <div class="offcanvas-body">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link text-white" href="Accueil.html"
+              ><i class="bi bi-house-door"></i> Accueil</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="#contact"
+              ><i class="bi bi-envelope"></i> Contact</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="apropos.html"
+              ><i class="bi bi-info-circle"></i> À propos</a
+            >
+            </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="Manuel-d'utilisation.html"
+              ><i class="bi bi-info-circle"></i> Aide</a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Section Héros -->
+    <section class="hero">
+      <div class="container">
+        <h1>À propos de AUTO-RENT</h1>
+        <p>
+          Votre partenaire de confiance pour la location de véhicules premium et
+          accessibles.
+        </p>
+      </div>
+    </section>
+
+    <!-- Contenu principal -->
+    <section class="content-section container">
+      <div class="row align-items-center mb-5">
+        <div class="col-md-6">
+          <img
+            src="flote de vehicule.png"
+            class="img-fluid rounded"
+            alt="Flotte de véhicules"
+          />
+        </div>
+        <div class="col-md-6">
+          <h2 class="section-title">Notre Histoire</h2>
+          <p>
+            Fondée en 2024, AUTO-RENT est née de la volonté de moderniser
+            l'expérience de location de voitures en Afrique. Grâce à une
+            technologie avancée, une flotte diversifiée et un service client
+            exemplaire, nous avons su nous imposer comme un acteur
+            incontournable du secteur.
+          </p>
+        </div>
+      </div>
+
+      <div class="row align-items-center mb-5">
+        <div class="col-md-6 order-md-2">
+          <img
+            src="digitalisation.png"
+            class="img-fluid rounded"
+            alt="Digitalisation"
+          />
+        </div>
+        <div class="col-md-6 order-md-1">
+          <h2 class="section-title">Notre Mission</h2>
+          <div class="mission-box">
+            <p>
+              Rendre la location de véhicules simple, rapide et transparente.
+              Que ce soit pour un déplacement professionnel, un voyage ou un
+              besoin quotidien, AUTO-RENT offre une solution adaptée, sécurisée
+              et haut de gamme.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row align-items-start">
+        <div class="col-md-6">
+          <h2 class="section-title">Nos Valeurs</h2>
+          <ul class="values-list list-unstyled">
+            <li>✔️ Transparence et intégrité</li>
+            <li>✔️ Sécurité et fiabilité</li>
+            <li>✔️ Innovation continue</li>
+            <li>✔️ Accessibilité pour tous</li>
+            <li>✔️ Expérience client exceptionnelle</li>
+          </ul>
+        </div>
+        <div class="col-md-6">
+          <h2 class="section-title">Pourquoi nous choisir ?</h2>
+          <ul class="values-list list-unstyled">
+            <li>🚗 Large choix de véhicules récents</li>
+            <li>💻 Réservations 100% en ligne</li>
+            <li>📱 Assistance 24h/24, 7j/7</li>
+            <li>🌍 Couverture nationale</li>
+            <li>💼 Offres entreprises & particuliers</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    <section class="bg-primary text-white py-5">
+      <div class="container text-center">
+        <h2 class="mb-4">Ce que disent nos clients</h2>
+        <div class="row justify-content-center">
+          <div class="col-md-8">
+            <div class="card bg-light text-dark p-4 border-0 shadow-sm">
+              <div class="row g-3 align-items-center">
+                <div class="col-md-4 text-center">
+                  <img
+                    src="homme.png"
+                    alt="Client satisfait"
+                    class="rounded-circle img-fluid shadow-sm"
+                    style="width: 150px; height: 150px; object-fit: cover"
+                  />
+                </div>
+                <div class="col-md-8 text-start">
+                  <h5 class="fw-bold">Jean Dupont</h5>
+                  <p class="mb-1">
+                    <i class="bi bi-quote"></i> Un service rapide, des voitures
+                    impeccables, et une réservation facile en ligne. Je
+                    recommande vivement AUTO-RENT !
+                  </p>
+                  <small class="text-muted">Client depuis janvier 2025</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pied de page -->
+    <footer>&copy; 2025 AUTO-RENT. Tous droits réservés.</footer>
+    <!-- Popup de Connexion -->
+    <div
+      id="popupOverlay"
+      class="d-none position-fixed top-0 start-0 w-100 h-100 bg-dark bg-opacity-75 d-flex justify-content-center align-items-center"
+      style="z-index: 1050"
+    >
+      <div
+        class="bg-white rounded p-4 shadow-lg"
+        style="width: 90%; max-width: 400px; position: relative"
+      >
+        <button
+          onclick="closePopup()"
+          class="btn-close position-absolute top-0 end-0 m-3"
+        ></button>
+        <h4 class="mb-3 text-center">Connexion ou Inscription</h4>
+        <p class="text-muted text-center mb-4">
+          Entrez votre email pour continuer.
+        </p>
+        <input
+          type="email"
+          class="form-control mb-3"
+          placeholder="Adresse email"
+        />
+        <button class="btn btn-warning w-100 mb-2">
+          Continuer avec l'email
+        </button>
+        <button
+          class="btn btn-light w-100 mb-2 d-flex align-items-center justify-content-center gap-2 border"
+        >
+          <img src="https://img.icons8.com/color/16/google-logo.png" />
+          Continuer avec Google
+        </button>
+        <button
+          class="btn btn-light w-100 mb-3 d-flex align-items-center justify-content-center gap-2 border"
+        >
+          <img src="https://img.icons8.com/ios-filled/16/mac-os.png" />
+          Continuer avec Apple
+        </button>
+        <a
+          href="Inscription-AUTO RENT.HTML"
+          class="d-block text-center small text-decoration-none text-primary"
+          >Pas encore inscrit ? Créez un compte entreprise</a
+        >
+      </div>
+    </div>
+    <script>
+      function openPopup() {
+        document.getElementById("popupOverlay").classList.remove("d-none");
+      }
+
+      function closePopup() {
+        document.getElementById("popupOverlay").classList.add("d-none");
+      }
+    </script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
